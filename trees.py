@@ -1,5 +1,6 @@
 """Tree class and tree node class."""
 
+
 class Node():
     """Node in a tree."""
 
@@ -29,7 +30,6 @@ class Node():
             to_visit.extend(current.children)
 
 
-
 class Tree():
     """Tree."""
 
@@ -50,6 +50,19 @@ class Tree():
 
         return self.root.find(data)
 
+    def total_nodes(self):
+        total = 0
+
+        to_visit = [root]
+
+        while len(to_visit) != 0:
+            current = to_visit.pop()
+            total += 1
+            for child in current.children:
+                to_visit.append(child)
+
+        return total
+
 
 if __name__ == '__main__':
     # Make an example tree and search for things in it
@@ -65,3 +78,4 @@ if __name__ == '__main__':
     tree = Tree(root)
     print("server.py = ", tree.find_in_tree("server.py"))  # should find
     print("style.css = ", tree.find_in_tree("style.css"))  # should not find
+    print(tree.total_nodes())
