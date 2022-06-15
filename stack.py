@@ -66,6 +66,13 @@ class Stack():
 
         return self._list.pop()
 
+    def top_two(self):
+        """Remove top two items and return them."""
+
+        if not self._list:
+            raise StackEmptyError()
+
+        return [self._list.pop(), self._list.pop()]
 
     def length(self):
         """Return length of stack."""
@@ -92,23 +99,24 @@ class Stack():
 
 
 def are_parens_balanced(symbols):
-      """Are parentheses balanced in expression?"""
+    """Are parentheses balanced in expression?"""
 
-      # make a stack
-      parens = Stack()
+    # make a stack
+    parens = Stack()
 
-      for char in symbols:
+    for char in symbols:
 
-          if char == "(":
-              parens.push(char)   # push onto stack
+        if char == "(":
+            parens.push(char)   # push onto stack
 
-          elif char == ")":
-              if parens.is_empty():
-                  return False
-              else:
-                  parens.pop()      # pop from stack
+        elif char == ")":
+            if parens.is_empty():
+                return False
+            else:
+                parens.pop()      # pop from stack
 
-      return parens.is_empty()
+    return parens.is_empty()
+
 
 are_parens_balanced("((3+4)-(1+2))/(1+1)")
 
@@ -123,10 +131,12 @@ if __name__ == '__main__':
     from timeit import timeit
 
     print("Time for our Stack class")
-    print(timeit("s.push(1); s.pop()", "from __main__ import Stack; s=Stack(list(range(50000)))"))
+    print(timeit("s.push(1); s.pop()",
+          "from __main__ import Stack; s=Stack(list(range(50000)))"))
 
     print("Time for native Python list as stack")
     print(timeit("s.append(1); s.pop()", "s=(list(range(50000)))"))
 
     print("Time for native Python deque as stack")
-    print(timeit("s.append(1); s.pop()", "from collections import deque; s=deque(list(range(50000)))"))
+    print(timeit("s.append(1); s.pop()",
+          "from collections import deque; s=deque(list(range(50000)))"))
