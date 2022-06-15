@@ -82,6 +82,17 @@ class LinkedList(object):
     def __repr__(self):
         return f"<Linked List. Head: {self.head.data if self.head else None}; Tail: {self.tail.data if self.head else None}>"
 
+    def __len__(self):
+        current = self.head
+        if current is None:
+            return 0
+        else:
+            length = 0
+            while current is not None:
+                length += 1
+                current = current.next
+            return length
+
     def append(self, data):
         """Append node with data to end of list."""
 
@@ -190,3 +201,4 @@ if __name__ == '__main__':
     ll.append("apple")
     ll.append("berry")
     ll.append("cherry")
+    print(len(ll))
